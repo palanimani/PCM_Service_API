@@ -1,0 +1,24 @@
+USE [PCM_Main]
+GO
+/****** Object:  StoredProcedure [dbo].[SpCheck_User]    Script Date: 21-06-2022 12:31:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[SpCheck_User]  --'3454','kkk'
+@UserID nvarchar(max),
+@UserPwd nvarchar(max)
+AS
+
+if exists(Select 1 from Users Where UserID = @UserID)
+
+Begin
+Select UserID from Users Where UserID= @UserID and UserPwd = @UserPwd
+END
+
+ELSE
+BEGIN
+Select -1 as UserID
+END
+
+RETURN 0
